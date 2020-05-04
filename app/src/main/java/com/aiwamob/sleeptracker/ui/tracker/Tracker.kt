@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.aiwamob.sleeptracker.R
+import com.aiwamob.sleeptracker.database.SleepDatabase
 import com.aiwamob.sleeptracker.databinding.FragmentTrackerBinding
 
 /**
@@ -25,6 +27,14 @@ class Tracker : Fragment() {
     ): View? {
 
         trackerBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tracker, container, false)
+        //requireNotNull(this.activity).application
+        val application = requireActivity().application
+        val dataSource = SleepDatabase.getInstance(application).sleepDao
+        val trackerViewModelFactory = TrackerViewModelFactory(dataSource, application)
+        val trackerViewModel = ViewModelProvider(this, trackerViewModelFactory).get(TrackerViewModel::class.java)
+
+        trackerBinding.trackerViewModel = trackerViewModel
+        trackerBinding.lifecycleOwner = this
 
         trackerBinding.apply {
 
