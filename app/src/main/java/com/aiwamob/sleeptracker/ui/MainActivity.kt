@@ -1,7 +1,8 @@
-package com.aiwamob.sleeptracker
+package com.aiwamob.sleeptracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aiwamob.sleeptracker.R
 
 class MainActivity : AppCompatActivity() {
 

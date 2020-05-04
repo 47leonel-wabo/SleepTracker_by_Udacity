@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sleep_tracker_navigation"
+    app:startDestination="@id/tracker">
+
+    <fragment
+        android:id="@+id/tracker"
+        android:name="com.aiwamob.sleeptracker.ui.tracker.Tracker"
+        tools:layout="@layout/fragment_tracker"
+        android:label="Tracker" >
+        <action
+            android:id="@+id/action_tracker_to_quality"
+            app:destination="@id/quality"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/quality"
+        android:name="com.aiwamob.sleeptracker.ui.quality.Quality"
+        tools:layout="@layout/fragment_quality"
+        android:label="Quality" />
+</navigation>
