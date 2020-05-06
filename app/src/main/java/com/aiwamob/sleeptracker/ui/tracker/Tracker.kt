@@ -1,5 +1,6 @@
 package com.aiwamob.sleeptracker.ui.tracker
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,7 +29,7 @@ class Tracker : Fragment() {
 
         trackerBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tracker, container, false)
         //requireNotNull(this.activity).application
-        val application = requireActivity().application
+        val application: Application = requireNotNull(this.activity).application
         val dataSource = SleepDatabase.getInstance(application).sleepDao
         val trackerViewModelFactory = TrackerViewModelFactory(dataSource, application)
         val trackerViewModel = ViewModelProvider(this, trackerViewModelFactory).get(TrackerViewModel::class.java)
@@ -36,13 +37,13 @@ class Tracker : Fragment() {
         trackerBinding.trackerViewModel = trackerViewModel
         trackerBinding.lifecycleOwner = this
 
-        trackerBinding.apply {
+        /*trackerBinding.apply {
 
             stopRecordButton.setOnClickListener {
                 it.findNavController().navigate(TrackerDirections.actionTrackerToQuality())
             }
 
-        }
+        }*/
 
         return trackerBinding.root
     }

@@ -19,11 +19,11 @@ interface SleepDao {
     fun getAllSleeps(): LiveData<List<ASleep>>
 
     @Query("SELECT * FROM daily_sleep_quality_table WHERE sleepId =(:id)")
-    fun getSleep(id: Long): ASleep
+    fun getSleep(id: Long): ASleep?
 
     @Query("DELETE FROM daily_sleep_quality_table")
     fun removeAllSleeps()
 
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepId LIMIT 1")
-    fun getLatestSleep(): ASleep
+    fun getLatestSleep(): ASleep?
 }
