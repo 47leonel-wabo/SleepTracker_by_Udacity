@@ -20,7 +20,7 @@ class SleepAdapter: RecyclerView.Adapter<SleepAdapter.SleepViewHolder>() {
             notifyDataSetChanged()
         }
 
-    class SleepViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class SleepViewHolder private constructor(view: View): RecyclerView.ViewHolder(view) {
         private val sleepImageQuality: ImageView = view.findViewById(R.id.sleepRatingImageView)
         private val sleepLength: TextView = view.findViewById(R.id.sleepLength_tv)
         private val sleepQuality: TextView = view.findViewById(R.id.sleepQuality_tv)
@@ -39,14 +39,22 @@ class SleepAdapter: RecyclerView.Adapter<SleepAdapter.SleepViewHolder>() {
                 else -> R.drawable.ic_sleeping
             })
         }
+
+        companion object{
+            fun from(parent: ViewGroup): SleepViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.sleep_item, parent, false)
+
+                return SleepViewHolder(view)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SleepViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.sleep_item, parent, false)
-
-        return SleepViewHolder(view)
+        return SleepViewHolder.from(parent)
     }
+
+
 
     override fun getItemCount(): Int = data.size
 
