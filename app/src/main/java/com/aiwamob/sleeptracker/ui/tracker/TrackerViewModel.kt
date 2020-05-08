@@ -52,6 +52,18 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
         }
     }
 
+    val startButtonVisibility = Transformations.map(toNight){
+        it == null
+    }
+
+    val stopButtonVisibility = Transformations.map(toNight){
+        it != null
+    }
+
+    val clearButtonVisibility = Transformations.map(allSleeps){
+        it?.isNotEmpty()
+    }
+
     fun startTrackingSleep(){
         viewModelScope.launch(Dispatchers.Main) {
             val sleep = ASleep()

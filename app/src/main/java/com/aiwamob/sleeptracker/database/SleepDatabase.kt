@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aiwamob.sleeptracker.model.ASleep
 
-private const val DATABASE_NANE = "sleep_history"
+private const val DATABASE_NAME = "sleep_history"
 
 @Database(entities = [ASleep::class], version = 1, exportSchema = false)
 abstract class SleepDatabase : RoomDatabase() {
@@ -22,7 +22,7 @@ abstract class SleepDatabase : RoomDatabase() {
                 var instance = INSTANCE
 
                 if (instance == null){
-                    instance = Room.databaseBuilder(context.applicationContext, SleepDatabase::class.java, DATABASE_NANE)
+                    instance = Room.databaseBuilder(context.applicationContext, SleepDatabase::class.java, DATABASE_NAME)
                         .fallbackToDestructiveMigration()
                         .build()
 

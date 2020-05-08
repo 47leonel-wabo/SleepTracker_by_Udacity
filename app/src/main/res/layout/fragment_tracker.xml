@@ -25,7 +25,8 @@
             android:text="@string/stop_txt"
             android:onClick="@{() -> trackerViewModel.stopTrackingSleep()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:enabled="@{trackerViewModel.stopButtonVisibility}"/>
 
         <Button
             android:id="@+id/startRecordButton"
@@ -38,7 +39,8 @@
             android:text="@string/start_txt"
             app:layout_constraintBottom_toBottomOf="@+id/stopRecordButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:enabled="@{trackerViewModel.startButtonVisibility}"/>
 
         <ScrollView
             android:id="@+id/scrollView2"
@@ -80,6 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            android:enabled="@{trackerViewModel.clearButtonVisibility}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
