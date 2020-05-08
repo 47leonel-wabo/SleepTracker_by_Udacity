@@ -1,11 +1,7 @@
 package com.aiwamob.sleeptracker.ui.tracker
 
 import android.app.Application
-import android.content.res.Resources
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.aiwamob.sleeptracker.database.SleepDao
 import com.aiwamob.sleeptracker.model.ASleep
 import com.aiwamob.sleeptracker.utilities.formatSleep
@@ -18,32 +14,37 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
         initializeToNight()
     }
 
+    private var toNight = MutableLiveData<ASleep?>()
+
+    private val allSleeps = sleepDao.getAllSleeps()
+
+    private val _navigateToQuality = MutableLiveData<ASleep>()
+    val navigateToSleepQuality: LiveData<ASleep>
+        get() = _navigateToQuality
+
     private fun initializeToNight() {
         viewModelScope.launch(Dispatchers.Main) {
-            toNight.value = getLastToNight()
+            toNight.value = getRecentSleep()
         }
     }
 
     private val dao = sleepDao
-    private suspend fun getLastToNight(): ASleep? {
+
+    private suspend fun getRecentSleep(): ASleep? {
+
         return withContext(Dispatchers.IO) {
             var night = dao.getLatestSleep()
-            night?.let {
-                if (night?.endTime != night?.startTime) {
-                    night = null
-                }
+            if (night?.endTime != night?.startTime) {
+                night = null
             }
             night
         }
     }
 
-    //private var viewModelJob = Job()
 
-    //private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private var toNight = MutableLiveData<ASleep?>()
-
-    private val allSleeps = sleepDao.getAllSleeps()
+    fun doneNavigation(){
+        _navigateToQuality.value = null
+    }
 
     val sleepString = Transformations.map(allSleeps){
         it?.let {
@@ -57,7 +58,7 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
 
             addSleep(sleep)
 
-            toNight.value = getLastToNight()
+            toNight.value = getRecentSleep()
         }
     }
 
@@ -73,6 +74,7 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
             oldSleep.endTime = System.currentTimeMillis()
 
             updateOldSleep(oldSleep)
+            _navigateToQuality.value = oldSleep
         }
     }
 

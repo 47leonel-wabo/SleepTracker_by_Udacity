@@ -13,5 +13,10 @@
     <string name="end_time"><![CDATA[<b>End:</b>]]></string>
     <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
     <string name="sleep_hours"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
+    <string name="rating_negative">Rating negative</string>
+    <string name="rating_zero">Rating zero</string>
+    <string name="rating_one">Rating one</string>
+    <string name="rating_two">Rating two</string>
+    <string name="rating_three">Rating Three</string>
 
 </resources>

@@ -20,5 +20,12 @@
         android:id="@+id/quality"
         android:name="com.aiwamob.sleeptracker.ui.quality.Quality"
         tools:layout="@layout/fragment_quality"
-        android:label="Quality" />
+        android:label="Quality" >
+        <action
+            android:id="@+id/action_quality_to_tracker"
+            app:destination="@id/tracker" />
+        <argument
+            android:name="sleepId"
+            app:argType="long" />
+    </fragment>
 </navigation>

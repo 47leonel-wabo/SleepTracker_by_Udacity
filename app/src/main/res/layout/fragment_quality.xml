@@ -3,21 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="qualityViewModel"
+            type="com.aiwamob.sleeptracker.ui.quality.QualityViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageButton
+            android:id="@+id/ratingNegative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/rating_negative"
+            app:layout_constraintEnd_toStartOf="@+id/ratingZero"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(1)}"
+            app:srcCompat="@drawable/ic__1" />
+
+        <ImageButton
+            android:id="@+id/ratingZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/rating_zero"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingNegative"
+            app:layout_constraintEnd_toStartOf="@+id/ratingOne"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ratingNegative"
+            app:layout_constraintTop_toTopOf="@+id/ratingNegative"
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(2)}"
+            app:srcCompat="@drawable/ic_0" />
+
+        <ImageButton
+            android:id="@+id/ratingOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/rating_one"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingZero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ratingZero"
+            app:layout_constraintTop_toTopOf="@+id/ratingZero"
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(3)}"
+            app:srcCompat="@drawable/ic_4" />
+
+        <ImageButton
+            android:id="@+id/ratingTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/lato_light"
-            android:text="@string/note_sleep_quality"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:contentDescription="@string/rating_two"
+            app:layout_constraintStart_toStartOf="@+id/ratingZero"
+            app:layout_constraintTop_toBottomOf="@+id/ratingNegative"
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(4)}"
+            app:srcCompat="@drawable/ic_2" />
+
+        <ImageButton
+            android:id="@+id/ratingThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/rating_three"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingTwo"
+            app:layout_constraintEnd_toEndOf="@+id/ratingOne"
+            app:layout_constraintTop_toTopOf="@+id/ratingTwo"
+            app:layout_constraintVertical_bias="0.0"
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(5)}"
+            app:srcCompat="@drawable/ic_5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

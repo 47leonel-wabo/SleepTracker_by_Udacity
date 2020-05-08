@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.database.SleepDatabase
 import com.aiwamob.sleeptracker.databinding.FragmentTrackerBinding
@@ -37,13 +39,13 @@ class Tracker : Fragment() {
         trackerBinding.trackerViewModel = trackerViewModel
         trackerBinding.lifecycleOwner = this
 
-        /*trackerBinding.apply {
 
-            stopRecordButton.setOnClickListener {
-                it.findNavController().navigate(TrackerDirections.actionTrackerToQuality())
+        trackerViewModel.navigateToSleepQuality.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                this.findNavController().navigate(TrackerDirections.actionTrackerToQuality(it.sleepId))
+                trackerViewModel.doneNavigation()
             }
-
-        }*/
+        })
 
         return trackerBinding.root
     }

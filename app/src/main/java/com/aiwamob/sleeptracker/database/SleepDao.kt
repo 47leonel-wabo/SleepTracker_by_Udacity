@@ -24,6 +24,6 @@ interface SleepDao {
     @Query("DELETE FROM daily_sleep_quality_table")
     fun removeAllSleeps()
 
-    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepId LIMIT 1")
+    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepId DESC LIMIT 1")
     fun getLatestSleep(): ASleep?
 }
