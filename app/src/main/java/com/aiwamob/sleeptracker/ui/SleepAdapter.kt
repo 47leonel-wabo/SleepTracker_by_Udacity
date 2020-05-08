@@ -1,13 +1,12 @@
 package com.aiwamob.sleeptracker.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aiwamob.sleeptracker.R
+import com.aiwamob.sleeptracker.databinding.SleepItemBinding
 import com.aiwamob.sleeptracker.model.ASleep
 import com.aiwamob.sleeptracker.utilities.SleepDiffCallback
 import com.aiwamob.sleeptracker.utilities.convertNumericQualityToString
@@ -22,32 +21,30 @@ class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffC
             notifyDataSetChanged()
         }*/
 
-    class SleepViewHolder private constructor(view: View): RecyclerView.ViewHolder(view) {
-        private val sleepImageQuality: ImageView = view.findViewById(R.id.sleepRatingImageView)
-        private val sleepLength: TextView = view.findViewById(R.id.sleepLength_tv)
-        private val sleepQuality: TextView = view.findViewById(R.id.sleepQuality_tv)
-
+    class SleepViewHolder private constructor(private val binding: SleepItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(sleep: ASleep){
             val sleepTime = (sleep.endTime - sleep.startTime)
-            sleepLength.text = SimpleDateFormat("EEEE, HH:mm:ss", Locale.ROOT).format(sleepTime)
-            sleepQuality.text = convertNumericQualityToString(sleep.sleepQuality)
-            sleepImageQuality.setImageResource(when(sleep.sleepQuality){
-                0 -> R.drawable.ic_very_bad_sleep
-                1 -> R.drawable.ic_poor_sleep
-                2 -> R.drawable.ic_soso_sleep
-                3 -> R.drawable.ic_pretty_good_sleep
-                4 -> R.drawable.ic_excellent_sleep
-                else -> R.drawable.ic_sleeping
-            })
+            binding.apply {
+                sleepLengthTv.text = SimpleDateFormat("EEEE, HH:mm:ss", Locale.ROOT).format(sleepTime)
+                sleepQualityTv.text = convertNumericQualityToString(sleep.sleepQuality)
+                sleepRatingImageView.setImageResource(when(sleep.sleepQuality){
+                    0 -> R.drawable.ic_very_bad_sleep
+                    1 -> R.drawable.ic_poor_sleep
+                    2 -> R.drawable.ic_soso_sleep
+                    3 -> R.drawable.ic_pretty_good_sleep
+                    4 -> R.drawable.ic_excellent_sleep
+                    else -> R.drawable.ic_sleeping
+                })
+            }
         }
 
         companion object{
             fun from(parent: ViewGroup): SleepViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.sleep_item, parent, false)
+                val binding: SleepItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.sleep_item, parent, false)
 
-                return SleepViewHolder(view)
+                return SleepViewHolder(binding)
             }
         }
     }
