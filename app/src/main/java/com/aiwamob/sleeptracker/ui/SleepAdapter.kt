@@ -5,20 +5,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.model.ASleep
+import com.aiwamob.sleeptracker.utilities.SleepDiffCallback
 import com.aiwamob.sleeptracker.utilities.convertNumericQualityToString
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SleepAdapter: RecyclerView.Adapter<SleepAdapter.SleepViewHolder>() {
+class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
 
-     var data = listOf<ASleep>()
+     /*var data = listOf<ASleep>()
         set(value) {
             field = value
             notifyDataSetChanged()
-        }
+        }*/
 
     class SleepViewHolder private constructor(view: View): RecyclerView.ViewHolder(view) {
         private val sleepImageQuality: ImageView = view.findViewById(R.id.sleepRatingImageView)
@@ -54,12 +56,10 @@ class SleepAdapter: RecyclerView.Adapter<SleepAdapter.SleepViewHolder>() {
         return SleepViewHolder.from(parent)
     }
 
-
-
-    override fun getItemCount(): Int = data.size
+    //override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: SleepViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 }

@@ -45,7 +45,7 @@ class Tracker : Fragment() {
         trackerBinding.sleepRecyclerList.adapter = adapter
         trackerViewModel.allSleeps.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 
