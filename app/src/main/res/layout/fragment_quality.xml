@@ -24,8 +24,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(1)}"
-            app:srcCompat="@drawable/ic__1" />
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(0)}"
+            app:srcCompat="@drawable/ic_very_bad_sleep" />
 
         <ImageButton
             android:id="@+id/ratingZero"
@@ -38,8 +38,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ratingNegative"
             app:layout_constraintTop_toTopOf="@+id/ratingNegative"
-            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(2)}"
-            app:srcCompat="@drawable/ic_0" />
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(1)}"
+            app:srcCompat="@drawable/ic_poor_sleep" />
 
         <ImageButton
             android:id="@+id/ratingOne"
@@ -52,8 +52,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ratingZero"
             app:layout_constraintTop_toTopOf="@+id/ratingZero"
-            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(3)}"
-            app:srcCompat="@drawable/ic_4" />
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(2)}"
+            app:srcCompat="@drawable/ic_soso_sleep" />
 
         <ImageButton
             android:id="@+id/ratingTwo"
@@ -63,8 +63,8 @@
             android:contentDescription="@string/rating_two"
             app:layout_constraintStart_toStartOf="@+id/ratingZero"
             app:layout_constraintTop_toBottomOf="@+id/ratingNegative"
-            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(4)}"
-            app:srcCompat="@drawable/ic_2" />
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(3)}"
+            app:srcCompat="@drawable/ic_pretty_good_sleep" />
 
         <ImageButton
             android:id="@+id/ratingThree"
@@ -75,7 +75,7 @@
             app:layout_constraintEnd_toEndOf="@+id/ratingOne"
             app:layout_constraintTop_toTopOf="@+id/ratingTwo"
             app:layout_constraintVertical_bias="0.0"
-            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(5)}"
-            app:srcCompat="@drawable/ic_5" />
+            android:onClick="@{() -> qualityViewModel.onSetSleepQuality(4)}"
+            app:srcCompat="@drawable/ic_excellent_sleep" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

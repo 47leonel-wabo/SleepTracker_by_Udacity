@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.database.SleepDatabase
 import com.aiwamob.sleeptracker.databinding.FragmentTrackerBinding
+import com.aiwamob.sleeptracker.ui.SleepAdapter
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -40,6 +41,13 @@ class Tracker : Fragment() {
         trackerBinding.trackerViewModel = trackerViewModel
         trackerBinding.lifecycleOwner = this
 
+        val adapter = SleepAdapter()
+        trackerBinding.sleepRecyclerList.adapter = adapter
+        trackerViewModel.allSleeps.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
 
         trackerViewModel.navigateToSleepQuality.observe(viewLifecycleOwner, Observer {
             it?.let {

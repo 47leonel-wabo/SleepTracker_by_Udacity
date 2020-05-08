@@ -16,7 +16,7 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
 
     private var toNight = MutableLiveData<ASleep?>()
 
-    private val allSleeps = sleepDao.getAllSleeps()
+    val allSleeps = sleepDao.getAllSleeps()
 
     private val _navigateToQuality = MutableLiveData<ASleep>()
     val navigateToSleepQuality: LiveData<ASleep>

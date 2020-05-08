@@ -24,7 +24,20 @@ fun convertLongToDateString(time: Long): String = SimpleDateFormat("EEEE MMM-dd-
 fun convertNumericQualityToString(quality: Int, resources: Resources): String{
     var qualityString = "OK"
     when(quality){
-        -1 -> qualityString = "--"
+        -1 -> qualityString = "Pending Zzz..."
+        0 -> qualityString = "Very bad"
+        1 -> qualityString = "Poor"
+        2 -> qualityString = "So-so"
+        3 -> qualityString = "Pretty good"
+        4 -> qualityString = "Excellent"
+    }
+    return qualityString
+}
+
+fun convertNumericQualityToString(quality: Int): String{
+    var qualityString = "OK"
+    when(quality){
+        -1 -> qualityString = "Pending Zzz..."
         0 -> qualityString = "Very bad"
         1 -> qualityString = "Poor"
         2 -> qualityString = "So-so"

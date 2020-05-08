@@ -42,47 +42,31 @@
             app:layout_constraintTop_toTopOf="parent"
             android:enabled="@{trackerViewModel.startButtonVisibility}"/>
 
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="413dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sleepRecyclerList"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@android:color/white"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/clearButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startRecordButton">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/lato_light"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:text="@{trackerViewModel.sleepString}" />
-        </ScrollView>
+            app:layout_constraintTop_toBottomOf="@+id/stopRecordButton"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <Button
             android:id="@+id/clearButton"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:enabled="@{trackerViewModel.clearButtonVisibility}"
             android:fontFamily="@font/lato"
-            android:text="@string/clear_txt"
             android:onClick="@{() -> trackerViewModel.clear()}"
+            android:text="@string/clear_txt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-            android:enabled="@{trackerViewModel.clearButtonVisibility}"/>
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
