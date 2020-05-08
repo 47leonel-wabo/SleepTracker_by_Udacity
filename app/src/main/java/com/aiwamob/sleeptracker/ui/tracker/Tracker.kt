@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.database.SleepDatabase
 import com.aiwamob.sleeptracker.databinding.FragmentTrackerBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A simple [Fragment] subclass.
@@ -44,6 +45,15 @@ class Tracker : Fragment() {
             it?.let {
                 this.findNavController().navigate(TrackerDirections.actionTrackerToQuality(it.sleepId))
                 trackerViewModel.doneNavigation()
+            }
+        })
+
+        trackerViewModel.showSnackBar.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it){
+                    Snackbar.make(requireActivity().findViewById(android.R.id.content), "Cleaning...", Snackbar.LENGTH_SHORT).show()
+                    trackerViewModel.doneShowingSnackBar()
+                }
             }
         })
 

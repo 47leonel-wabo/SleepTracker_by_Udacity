@@ -64,6 +64,14 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
         it?.isNotEmpty()
     }
 
+    private var _showSnackBar = MutableLiveData<Boolean>()
+    val showSnackBar: LiveData<Boolean>
+        get() = _showSnackBar
+
+    fun doneShowingSnackBar(){
+        _showSnackBar.value = false
+    }
+
     fun startTrackingSleep(){
         viewModelScope.launch(Dispatchers.Main) {
             val sleep = ASleep()
@@ -107,6 +115,7 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
         withContext(Dispatchers.IO){
             dao.removeAllSleeps()
         }
+        _showSnackBar.value = true
     }
 
 /*    override fun onCleared() {
