@@ -9,9 +9,6 @@ import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.databinding.SleepItemBinding
 import com.aiwamob.sleeptracker.model.ASleep
 import com.aiwamob.sleeptracker.utilities.SleepDiffCallback
-import com.aiwamob.sleeptracker.utilities.convertNumericQualityToString
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
 

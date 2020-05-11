@@ -19,45 +19,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/sleep_rating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_pretty_good_sleep"
-            android:contentDescription="@string/sleep_rating"
-            app:sleepImage="@{aSleep}"/>
+            app:sleepImage="@{aSleep}"
+            tools:srcCompat="@drawable/ic_pretty_good_sleep" />
 
-        <TextView
-            android:id="@+id/sleepLength_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/lato"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/sleepQuality_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sleepRatingImageView"
-            app:layout_constraintTop_toTopOf="@+id/sleepRatingImageView"
-            tools:text="Sleep length"
-            app:sleepDurationString="@{aSleep}"/>
 
         <TextView
             android:id="@+id/sleepQuality_tv"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/lato_light"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/sleepRatingImageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sleepRatingImageView"
-            app:layout_constraintTop_toBottomOf="@+id/sleepLength_tv"
-            tools:text="sleep quality"
-            app:sleepQualityString="@{aSleep}"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sleepRatingImageView"
+            app:layout_constraintStart_toStartOf="@+id/sleepRatingImageView"
+            app:layout_constraintTop_toBottomOf="@+id/sleepRatingImageView"
+            app:sleepQualityString="@{aSleep}"
+            tools:text="sleep quality" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

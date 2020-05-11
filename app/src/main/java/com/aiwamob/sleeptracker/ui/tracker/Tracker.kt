@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.database.SleepDatabase
 import com.aiwamob.sleeptracker.databinding.FragmentTrackerBinding
@@ -41,11 +42,15 @@ class Tracker : Fragment() {
         trackerBinding.trackerViewModel = trackerViewModel
         trackerBinding.lifecycleOwner = this
 
-        val adapter = SleepAdapter()
-        trackerBinding.sleepRecyclerList.adapter = adapter
+        val sleepAdapter = SleepAdapter()
+        val sleepLayoutManager = GridLayoutManager(activity, 3)
+        trackerBinding.sleepRecyclerList.apply {
+            layoutManager = sleepLayoutManager
+            adapter = sleepAdapter
+        }
         trackerViewModel.allSleeps.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                sleepAdapter.submitList(it)
             }
         })
 
