@@ -46,9 +46,9 @@ class Tracker : Fragment() {
         val sleepAdapter = SleepAdapter(SleepAdapter.SleepClickListener {
             trackerViewModel.onSleepItemSelected(it)
         })
-        //val sleepLayoutManager = GridLayoutManager(activity, 3)
+        val sleepLayoutManager = GridLayoutManager(activity, 3)
         trackerBinding.sleepRecyclerList.apply {
-            //layoutManager = sleepLayoutManager
+            layoutManager = sleepLayoutManager
             adapter = sleepAdapter
         }
         trackerViewModel.allSleeps.observe(viewLifecycleOwner, Observer {
