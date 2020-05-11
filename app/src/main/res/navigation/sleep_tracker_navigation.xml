@@ -14,7 +14,13 @@
             android:id="@+id/action_tracker_to_quality"
             app:destination="@id/quality"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/tracker" />
+        <action
+            android:id="@+id/action_tracker_to_detail"
+            app:destination="@id/detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/tracker" />
     </fragment>
     <fragment
         android:id="@+id/quality"
@@ -23,9 +29,24 @@
         android:label="Quality" >
         <action
             android:id="@+id/action_quality_to_tracker"
-            app:destination="@id/tracker" />
+            app:destination="@id/tracker"
+            app:popUpTo="@id/tracker" />
         <argument
             android:name="sleepId"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.aiwamob.sleeptracker.ui.detail.Detail"
+        tools:layout="@layout/fragment_detail"
+        android:label="Detail" >
+        <argument
+            android:name="sleepID"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detail_to_tracker"
+            app:destination="@id/tracker"
+            app:enterAnim="@anim/slide_out_left"
+            app:popUpTo="@id/tracker" />
     </fragment>
 </navigation>

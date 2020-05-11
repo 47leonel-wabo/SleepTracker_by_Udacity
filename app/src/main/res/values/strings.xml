@@ -19,5 +19,7 @@
     <string name="rating_two">Rating two</string>
     <string name="rating_three">Rating Three</string>
     <string name="sleep_rating">Sleep rating</string>
+    <string name="delete_txt">Delete</string>
+    <string name="sleep_quality_txt">Sleep quality</string>
 
 </resources>

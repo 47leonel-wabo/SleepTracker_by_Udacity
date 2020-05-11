@@ -42,15 +42,28 @@ class TrackerViewModel(sleepDao: SleepDao, application: Application) :
     }
 
 
+    private val _navigateToSleepDataQuality = MutableLiveData<Long>()
+    val navigateToSleepDataQuality: LiveData<Long>
+        get() = _navigateToSleepDataQuality
+
+    fun onSleepItemSelected(sleepID: Long?){
+        _navigateToSleepDataQuality.value = sleepID
+    }
+
+    fun onSleepDataNavigationDone(){
+        _navigateToSleepDataQuality.value = null
+    }
+
+
     fun doneNavigation(){
         _navigateToQuality.value = null
     }
 
-    val sleepString = Transformations.map(allSleeps){
+/*    val sleepString = Transformations.map(allSleeps){
         it?.let {
             formatSleep(it, application.resources)
         }
-    }
+    }*/
 
     val startButtonVisibility = Transformations.map(toNight){
         it == null

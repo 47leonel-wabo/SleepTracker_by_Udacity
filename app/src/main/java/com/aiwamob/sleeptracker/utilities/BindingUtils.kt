@@ -12,7 +12,12 @@ fun TextView.setSleepDurationStringFormated(item: ASleep?){
         text = convertLongToDateString(it.startTime)
     }
 }
-
+@BindingAdapter("sleepEndDurationString")
+fun TextView.setSleepDurationEndStringFormated(item: ASleep?){
+    item?.let {
+        text = convertLongToDateString(it.endTime)
+    }
+}
 @BindingAdapter("sleepQualityString")
 fun TextView.setSleepQualityFormated(item: ASleep?){
     item?.let {

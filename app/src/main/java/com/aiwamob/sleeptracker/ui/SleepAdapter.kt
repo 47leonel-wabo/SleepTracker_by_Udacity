@@ -10,7 +10,7 @@ import com.aiwamob.sleeptracker.databinding.SleepItemBinding
 import com.aiwamob.sleeptracker.model.ASleep
 import com.aiwamob.sleeptracker.utilities.SleepDiffCallback
 
-class SleepAdapter(val clickedItemListener: SleepClickListener): ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
+class SleepAdapter(private val clickedItemListener: SleepClickListener): ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
 
      /*var data = listOf<ASleep>()
         set(value) {

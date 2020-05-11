@@ -1,10 +1,7 @@
 package com.aiwamob.sleeptracker.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.aiwamob.sleeptracker.model.ASleep
 
 @Dao
@@ -26,4 +23,7 @@ interface SleepDao {
 
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepId DESC LIMIT 1")
     fun getLatestSleep(): ASleep?
+
+    @Delete
+    fun deleteSleep(sleep: ASleep)
 }

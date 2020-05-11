@@ -44,7 +44,7 @@ class Tracker : Fragment() {
         trackerBinding.lifecycleOwner = this
 
         val sleepAdapter = SleepAdapter(SleepAdapter.SleepClickListener {
-            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            trackerViewModel.onSleepItemSelected(it)
         })
         val sleepLayoutManager = GridLayoutManager(activity, 3)
         trackerBinding.sleepRecyclerList.apply {
@@ -61,6 +61,13 @@ class Tracker : Fragment() {
             it?.let {
                 this.findNavController().navigate(TrackerDirections.actionTrackerToQuality(it.sleepId))
                 trackerViewModel.doneNavigation()
+            }
+        })
+
+        trackerViewModel.navigateToSleepDataQuality.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                this.findNavController().navigate(TrackerDirections.actionTrackerToDetail(it))
+                trackerViewModel.onSleepDataNavigationDone()
             }
         })
 
