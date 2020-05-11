@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+<TextView
+    android:id="@+id/listHeader"
+    android:text="@string/header_txt"
+    android:textAppearance="?android:textAppearanceLarge"
+    android:padding="8dp"
+    android:fontFamily="@font/lato_light"
+    android:textSize="24sp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+</layout>

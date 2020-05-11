@@ -21,5 +21,6 @@
     <string name="sleep_rating">Sleep rating</string>
     <string name="delete_txt">Delete</string>
     <string name="sleep_quality_txt">Sleep quality</string>
+    <string name="header_txt">Sleep Tracker App</string>
 
 </resources>

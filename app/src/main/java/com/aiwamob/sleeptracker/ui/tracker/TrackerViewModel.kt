@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.aiwamob.sleeptracker.database.SleepDao
 import com.aiwamob.sleeptracker.model.ASleep
-import com.aiwamob.sleeptracker.utilities.formatSleep
 import kotlinx.coroutines.*
 
 class TrackerViewModel(sleepDao: SleepDao, application: Application) :

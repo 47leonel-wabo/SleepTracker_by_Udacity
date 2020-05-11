@@ -7,16 +7,34 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aiwamob.sleeptracker.R
 import com.aiwamob.sleeptracker.databinding.SleepItemBinding
+import com.aiwamob.sleeptracker.databinding.TextViewBindingBinding
 import com.aiwamob.sleeptracker.model.ASleep
 import com.aiwamob.sleeptracker.utilities.SleepDiffCallback
+import kotlinx.coroutines.*
 
-class SleepAdapter(private val clickedItemListener: SleepClickListener): ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
+private const val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_ITEM = 1
+
+class SleepAdapter(private val clickedItemListener: SleepClickListener): ListAdapter<SleepAdapter.DataItems,RecyclerView.ViewHolder >(SleepDiffCallback()) {
 
      /*var data = listOf<ASleep>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }*/
+
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
+
+    class TextViewHolder private constructor(txtBinding: TextViewBindingBinding): RecyclerView.ViewHolder(txtBinding.root){
+        companion object{
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val headBinding: TextViewBindingBinding = DataBindingUtil.inflate(layoutInflater, R.layout.text_view_binding, parent, false)
+
+                return TextViewHolder(headBinding)
+            }
+        }
+    }
 
     class SleepViewHolder private constructor(private val binding: SleepItemBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -53,20 +71,64 @@ class SleepAdapter(private val clickedItemListener: SleepClickListener): ListAda
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SleepViewHolder {
-        return SleepViewHolder.from(parent)
+    fun addHeaderAndSubmitList(list: List<ASleep>?){
+        adapterScope.launch {
+            val item = when(list){
+                null -> listOf(DataItems.Header)
+                else -> listOf(DataItems.Header) + list.map { DataItems.SleepItem(it) }
+            }
+            withContext(Dispatchers.Main){
+                submitList(item)
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType){
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> SleepViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType $viewType")
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+
+        return when(getItem(position)){
+            is DataItems.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItems.SleepItem -> ITEM_VIEW_TYPE_ITEM
+            else -> super.getItemViewType(position)
+        }
+
     }
 
     //override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: SleepViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, clickedItemListener)
+        when(holder){
+            is SleepViewHolder -> {
+                val sleepItem = getItem(position) as DataItems.SleepItem
+                holder.bind(sleepItem.sleep, clickedItemListener)
+            }
+        }
     }
 
     class SleepClickListener(val clickedItem: (sleepID: Long) -> Unit){
 
         fun onSleepClicked(sleep: ASleep) = clickedItem(sleep.sleepId)
 
+    }
+    //************* HEADER IMPL *****************************
+    sealed class DataItems{
+
+        data class SleepItem(val sleep : ASleep) : DataItems() {
+            override val id = sleep.sleepId
+        }
+
+        object Header: DataItems(){
+            override val id: Long = Long.MIN_VALUE
+        }
+
+        abstract val id: Long
     }
 }
