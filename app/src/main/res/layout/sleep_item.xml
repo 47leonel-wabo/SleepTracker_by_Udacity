@@ -7,11 +7,15 @@
         <variable
             name="aSleep"
             type="com.aiwamob.sleeptracker.model.ASleep" />
+        <variable
+            name="clickListener"
+            type="com.aiwamob.sleeptracker.ui.SleepAdapter.SleepClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onSleepClicked(aSleep)}">
 
         <ImageView
             android:id="@+id/sleepRatingImageView"

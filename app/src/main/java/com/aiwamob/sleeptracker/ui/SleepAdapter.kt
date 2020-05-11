@@ -10,7 +10,7 @@ import com.aiwamob.sleeptracker.databinding.SleepItemBinding
 import com.aiwamob.sleeptracker.model.ASleep
 import com.aiwamob.sleeptracker.utilities.SleepDiffCallback
 
-class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
+class SleepAdapter(val clickedItemListener: SleepClickListener): ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffCallback()) {
 
      /*var data = listOf<ASleep>()
         set(value) {
@@ -20,7 +20,7 @@ class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffC
 
     class SleepViewHolder private constructor(private val binding: SleepItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(sleep: ASleep){/*
+        fun bind(sleep: ASleep, itemClickListener: SleepClickListener){/*
             val sleepTime = (sleep.endTime - sleep.startTime)
             binding.apply {
                 sleepLengthTv.text = SimpleDateFormat("EEEE, HH:mm:ss", Locale.ROOT).format(sleepTime)
@@ -38,6 +38,7 @@ class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffC
             //*************** USING BIND-ADAPTER INSTEAD ********************************
             binding.apply {
                 aSleep = sleep
+                clickListener = itemClickListener
                 executePendingBindings()
             }
         }
@@ -60,6 +61,12 @@ class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffC
 
     override fun onBindViewHolder(holder: SleepViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickedItemListener)
+    }
+
+    class SleepClickListener(val clickedItem: (sleepID: Long) -> Unit){
+
+        fun onSleepClicked(sleep: ASleep) = clickedItem(sleep.sleepId)
+
     }
 }

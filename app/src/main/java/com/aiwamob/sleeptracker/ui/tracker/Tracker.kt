@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,7 +43,9 @@ class Tracker : Fragment() {
         trackerBinding.trackerViewModel = trackerViewModel
         trackerBinding.lifecycleOwner = this
 
-        val sleepAdapter = SleepAdapter()
+        val sleepAdapter = SleepAdapter(SleepAdapter.SleepClickListener {
+            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+        })
         val sleepLayoutManager = GridLayoutManager(activity, 3)
         trackerBinding.sleepRecyclerList.apply {
             layoutManager = sleepLayoutManager
