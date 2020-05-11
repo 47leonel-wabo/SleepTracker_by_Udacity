@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="sleep"
+            name="aSleep"
             type="com.aiwamob.sleeptracker.model.ASleep" />
     </data>
 
@@ -24,7 +24,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_pretty_good_sleep"
-            android:contentDescription="@string/sleep_rating" />
+            android:contentDescription="@string/sleep_rating"
+            app:sleepImage="@{aSleep}"/>
 
         <TextView
             android:id="@+id/sleepLength_tv"
@@ -39,7 +40,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/sleepRatingImageView"
             app:layout_constraintTop_toTopOf="@+id/sleepRatingImageView"
-            tools:text="Sleep length" />
+            tools:text="Sleep length"
+            app:sleepDurationString="@{aSleep}"/>
 
         <TextView
             android:id="@+id/sleepQuality_tv"
@@ -55,6 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/sleepRatingImageView"
             app:layout_constraintTop_toBottomOf="@+id/sleepLength_tv"
-            tools:text="sleep quality" />
+            tools:text="sleep quality"
+            app:sleepQualityString="@{aSleep}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

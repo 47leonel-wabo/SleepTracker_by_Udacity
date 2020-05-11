@@ -23,7 +23,7 @@ class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffC
 
     class SleepViewHolder private constructor(private val binding: SleepItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(sleep: ASleep){
+        fun bind(sleep: ASleep){/*
             val sleepTime = (sleep.endTime - sleep.startTime)
             binding.apply {
                 sleepLengthTv.text = SimpleDateFormat("EEEE, HH:mm:ss", Locale.ROOT).format(sleepTime)
@@ -36,15 +36,21 @@ class SleepAdapter: ListAdapter<ASleep, SleepAdapter.SleepViewHolder>(SleepDiffC
                     4 -> R.drawable.ic_excellent_sleep
                     else -> R.drawable.ic_sleeping
                 })
+            }*/
+
+            //*************** USING BIND-ADAPTER INSTEAD ********************************
+            binding.apply {
+                aSleep = sleep
+                executePendingBindings()
             }
         }
 
         companion object{
             fun from(parent: ViewGroup): SleepViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: SleepItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.sleep_item, parent, false)
+                val itemBinding: SleepItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.sleep_item, parent, false)
 
-                return SleepViewHolder(binding)
+                return SleepViewHolder(itemBinding)
             }
         }
     }
