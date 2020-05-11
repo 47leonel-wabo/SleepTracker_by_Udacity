@@ -47,6 +47,13 @@ class Tracker : Fragment() {
             trackerViewModel.onSleepItemSelected(it)
         })
         val sleepLayoutManager = GridLayoutManager(activity, 3)
+        sleepLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int = when(position){
+                0 -> 3
+                else -> 1
+            }
+
+        }
         trackerBinding.sleepRecyclerList.apply {
             layoutManager = sleepLayoutManager
             adapter = sleepAdapter
